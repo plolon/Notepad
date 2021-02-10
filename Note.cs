@@ -19,7 +19,7 @@ namespace Notepad
         private string noteName;
         public string NoteName 
         {
-            get => noteName;
+            get { return System.IO.Path.GetFileName(Path); }
             set { noteName = value; }
         }
 

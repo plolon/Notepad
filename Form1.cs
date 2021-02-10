@@ -20,7 +20,7 @@ namespace Notepad
         {
             InitializeComponent();
             newNote = new Note("new.txt", defaultPath);
-            UpdateHeader(newNote.NoteName);
+            UpdateHeader("new.txt");
         }
 
         //////////////// FILE /////////////
@@ -58,7 +58,6 @@ namespace Notepad
             if (dialog.FileName != "")
             {
                 newNote.Path = dialog.FileName;
-                newNote.NoteName = Path.GetFileName(dialog.FileName);
                 StreamReader note = new StreamReader(dialog.FileName);
                 textField.Text = note.ReadToEnd();
                 note.Close();
@@ -93,31 +92,12 @@ namespace Notepad
                 print.PrintPage += new PrintPageEventHandler(document_PrintPage);
                 print.Print();
             }
-
-
         }
 
         // Exit
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (File.Exists(newNote.Path) == false && textField.Text != "")
-            {
-                DialogResult dialog = MessageBox.Show($"Do you want to save changes in {newNote.NoteName}", "Notepad", MessageBoxButtons.YesNoCancel);
-                switch (dialog)
-                {
-                    case DialogResult.Yes:
-                        SaveFile(sender, e, true);
-                        this.Close();
-                        break;
-                    case DialogResult.No:
-                        this.Close();
-                        break;
-                    case DialogResult.Cancel:
-                        break;
-                }
-            }
-            else
-                this.Close();
+            Application.Exit();
         }
 
         // Print Preview
@@ -145,6 +125,36 @@ namespace Notepad
             if (textField.Text == "")
                 textField.Undo();
         }
+        //////////// TOOLS /////////////
+
+        //// CUSTOMIZE //////
+
+        // Font settings
+        private void fontMenuItem_Click(object sender, EventArgs e)
+        {
+            FontDialog dialog = new FontDialog();
+            dialog.Font = textField.Font;
+            dialog.ShowDialog();
+            textField.Font = dialog.Font;
+        }
+
+        // Background Color
+        private void backgroundMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            dialog.Color = textField.BackColor;
+            dialog.ShowDialog();
+            textField.BackColor = dialog.Color;
+        }
+
+        // Letters Color
+        private void letterMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            dialog.Color = textField.ForeColor;
+            dialog.ShowDialog();
+            textField.ForeColor = dialog.Color;
+        }
 
         /////////// METHODS /////////////
 
@@ -165,7 +175,6 @@ namespace Notepad
                 if (dialog.FileName != "")
                 {
                     newNote.Path = dialog.FileName;
-                    newNote.NoteName = Path.GetFileName(dialog.FileName);
                     StreamWriter note = new StreamWriter(dialog.FileName);
                     note.Write(textField.Text);
                     note.Close();
@@ -191,7 +200,39 @@ namespace Notepad
         // method to create print page
         void document_PrintPage(object sender, PrintPageEventArgs e)
         {
-            e.Graphics.DrawString(textField.Text, textField.Font, Brushes.Black, 20, 20);
+            SolidBrush brush = new SolidBrush(textField.ForeColor);
+            e.Graphics.DrawString(textField.Text, textField.Font, brush, 20, 20);
+        }
+
+        private void customizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // method to ask for save before closing
+        private void ClosingMethod(object sender, CancelEventArgs e)
+        {
+            if (File.Exists(newNote.Path) == false && textField.Text != "")
+            {
+                DialogResult dialog = MessageBox.Show($"Do you want to save changes in {newNote.NoteName}", "Notepad", MessageBoxButtons.YesNoCancel);
+                switch (dialog)
+                {
+                    case DialogResult.Yes:
+                        SaveFile(sender, e, true);
+                        break;
+                    case DialogResult.No:
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                }
+            }
+        }
+
+        // Closing Form Handler
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ClosingMethod(sender, e);
         }
     }
 }
