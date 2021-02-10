@@ -17,4 +17,6 @@ Project is created with:
 * Windows Forms App
 
 ## Images
-NOT YET
+![Algorithm schema](./images/notepad.png)
+
+![Algorithm schema](./images/notepad3.png)
