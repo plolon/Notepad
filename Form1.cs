@@ -15,7 +15,7 @@ namespace Notepad
     public partial class Form1 : Form
     {
         Note newNote;
-        string defaultPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        string defaultPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\new.txt";
         public Form1()
         {
             InitializeComponent();

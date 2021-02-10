@@ -49,10 +49,10 @@ namespace Notepad
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textField = new System.Windows.Forms.TextBox();
             this.fontMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.letterMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textField = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,7 +91,7 @@ namespace Notepad
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -178,7 +178,7 @@ namespace Notepad
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.undoToolStripMenuItem.Text = "&Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
@@ -186,19 +186,19 @@ namespace Notepad
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.redoToolStripMenuItem.Text = "&Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(141, 6);
             // 
             // toolsToolStripMenuItem
             // 
@@ -215,9 +215,30 @@ namespace Notepad
             this.backgroundMenuItem,
             this.letterMenuItem});
             this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.customizeToolStripMenuItem.Text = "&Customize";
             this.customizeToolStripMenuItem.Click += new System.EventHandler(this.customizeToolStripMenuItem_Click);
+            // 
+            // fontMenuItem
+            // 
+            this.fontMenuItem.Name = "fontMenuItem";
+            this.fontMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.fontMenuItem.Text = "Font";
+            this.fontMenuItem.Click += new System.EventHandler(this.fontMenuItem_Click);
+            // 
+            // backgroundMenuItem
+            // 
+            this.backgroundMenuItem.Name = "backgroundMenuItem";
+            this.backgroundMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.backgroundMenuItem.Text = "Background Color";
+            this.backgroundMenuItem.Click += new System.EventHandler(this.backgroundMenuItem_Click);
+            // 
+            // letterMenuItem
+            // 
+            this.letterMenuItem.Name = "letterMenuItem";
+            this.letterMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.letterMenuItem.Text = "Letters Color";
+            this.letterMenuItem.Click += new System.EventHandler(this.letterMenuItem_Click);
             // 
             // textField
             // 
@@ -229,27 +250,6 @@ namespace Notepad
             this.textField.Size = new System.Drawing.Size(800, 426);
             this.textField.TabIndex = 1;
             // 
-            // fontMenuItem
-            // 
-            this.fontMenuItem.Name = "fontMenuItem";
-            this.fontMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.fontMenuItem.Text = "Font";
-            this.fontMenuItem.Click += new System.EventHandler(this.fontMenuItem_Click);
-            // 
-            // backgroundMenuItem
-            // 
-            this.backgroundMenuItem.Name = "backgroundMenuItem";
-            this.backgroundMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.backgroundMenuItem.Text = "Background Color";
-            this.backgroundMenuItem.Click += new System.EventHandler(this.backgroundMenuItem_Click);
-            // 
-            // letterMenuItem
-            // 
-            this.letterMenuItem.Name = "letterMenuItem";
-            this.letterMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.letterMenuItem.Text = "Letters Color";
-            this.letterMenuItem.Click += new System.EventHandler(this.letterMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,6 +257,7 @@ namespace Notepad
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.textField);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
