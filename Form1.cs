@@ -29,7 +29,7 @@ namespace Notepad
         // New File
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (File.Exists(newNote.Path) == false && textField.Text != "")
+            if (File.Exists(newNote.Path) == false && !String.IsNullOrEmpty(textField.Text))
             {
                 DialogResult dialog = MessageBox.Show($"Do you want to save changes in {newNote.NoteName}", "Notepad", MessageBoxButtons.YesNoCancel);
                 switch (dialog)
@@ -52,17 +52,24 @@ namespace Notepad
         // Open File
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "txt files(*.txt)| *.txt";
-            dialog.ShowDialog();
-            if (dialog.FileName != "")
+            if (File.Exists(newNote.Path) == false && !String.IsNullOrEmpty(textField.Text))
             {
-                newNote.Path = dialog.FileName;
-                StreamReader note = new StreamReader(dialog.FileName);
-                textField.Text = note.ReadToEnd();
-                note.Close();
+                DialogResult dialog = MessageBox.Show($"Do you want to save changes in {newNote.NoteName}", "Notepad", MessageBoxButtons.YesNoCancel);
+                switch (dialog)
+                {
+                    case DialogResult.Yes:
+                        SaveFile(sender, e, true);
+                        OpenFileMethod();
+                        break;
+                    case DialogResult.No:
+                        OpenFileMethod();
+                        break;
+                    case DialogResult.Cancel:
+                        break;
+                }
             }
-            UpdateHeader(newNote.NoteName);
+            else
+                OpenFileMethod();
         }
 
         // Save File
@@ -115,14 +122,14 @@ namespace Notepad
         // Undo
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (textField.Text != "")
+            if (!String.IsNullOrEmpty(textField.Text))
                 textField.Undo();
         }
 
         // Redo
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (textField.Text == "")
+            if (String.IsNullOrEmpty(textField.Text))
                 textField.Undo();
         }
         //////////// TOOLS /////////////
@@ -172,7 +179,7 @@ namespace Notepad
                 SaveFileDialog dialog = new SaveFileDialog();
                 dialog.Filter = "txt files(*.txt)| *.txt";
                 dialog.ShowDialog();
-                if (dialog.FileName != "")
+                if (!String.IsNullOrEmpty(dialog.FileName))
                 {
                     newNote.Path = dialog.FileName;
                     StreamWriter note = new StreamWriter(dialog.FileName);
@@ -212,7 +219,7 @@ namespace Notepad
         // method to ask for save before closing
         private void ClosingMethod(object sender, CancelEventArgs e)
         {
-            if (File.Exists(newNote.Path) == false && textField.Text != "")
+            if (File.Exists(newNote.Path) == false && !String.IsNullOrEmpty(textField.Text))
             {
                 DialogResult dialog = MessageBox.Show($"Do you want to save changes in {newNote.NoteName}", "Notepad", MessageBoxButtons.YesNoCancel);
                 switch (dialog)
@@ -233,6 +240,21 @@ namespace Notepad
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             ClosingMethod(sender, e);
+        }
+
+        private void OpenFileMethod()
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "txt files(*.txt)| *.txt";
+            dialog.ShowDialog();
+            if (!String.IsNullOrEmpty(dialog.FileName))
+            {
+                newNote.Path = dialog.FileName;
+                StreamReader note = new StreamReader(dialog.FileName);
+                textField.Text = note.ReadToEnd();
+                note.Close();
+            }
+            UpdateHeader(newNote.NoteName);
         }
     }
 }
